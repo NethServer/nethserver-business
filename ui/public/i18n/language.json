@@ -1,0 +1,79 @@
+{
+    "settings": {
+        "title": "Settings",
+        "configure_shared_folder": "Configure shared folder",
+        "default_shared_folder_already_configured": "Shared folder is already configured. You need to disconnect it, if you want to reconfigure",
+        "connect_share": "Connect share",
+        "import_databases": "Import databases",
+        "configure_default_databases": "Configure default databases",
+        "default_databases_already_configured": "Databases are already configured. You need to delete or rename them, if you want to reconfigure",
+        "services_are_not_running": "One or more services are not running",
+        "check_services": "Please check mssql and smb services",
+        "install_from_software_center": "Install these packages from Software Center and configure them in order to proceed",
+        "error_reading_business_configuration": "Error while reading NethServer Business configuration",
+        "shared_folder_desc": "This function will connect default Business Cube 2 shared folder. You need to create it from File Server page before proceed",
+        "databases_desc": "This function will import default Business Cube 2 databases",
+        "shared_folder_name": "Shared folder name",
+        "shared_folder": "Shared folder",
+        "arcproc_db_name": "Arcproc database name",
+        "arcproc_db": "Arcproc database",
+        "company_db_name": "Company database name",
+        "company_db": "Company database",
+        "databases_configuration_ok": "Databases configured properly",
+        "databases_configuration_error": "Error while configuring databases",
+        "company_db_already_exists": "Specified Company database already exists",
+        "arcproc_db_already_exists": "Specified Arcproc database already exists",
+        "shared_folder_not_exists_or_not_empty": "Specified shared folder doesn't exist or is not empty",
+        "folder_configuration_ok": "Shared folder successfully connected",
+        "folder_configuration_error": "Error while connecting shared folder",
+        "disconnect_share": "Disconnect share"
+    },
+    "about": {
+        "title": "About",
+        "website": "Web site",
+        "bug_tracker": "Bug tracker"
+    },
+    "validation": {
+        "ArcprocDBAlreadyExists": "Specified Arcproc database already exists",
+        "CompanyDBAlreadyExists": "Specified Company database already exists",
+        "SharedFolderNotExists": "Specified shared folder doesn't exist or is not empty"
+    },
+    "logs": {
+        "title": "Logs",
+        "follow": "Follow",
+        "stop_follow": "Stop",
+        "start_follow_button": "Follow",
+        "stop_follow_button": "Stop following",
+        "filter_label": "Regexp filter"
+    },
+    "dashboard":{
+        "title": "Business Cube 2 dashboard",
+        "app": "Business",
+        "mssql_status": "SQL Server status",
+        "error_reading_business_status": "Error while reading NethServer Business status",
+        "shared_folder_status": "Shared folder status",
+        "arcproc_status": "Arcproc DB status",
+        "agg_number": "Business updates number (Aggnumber.txt)",
+        "running": "Running",
+        "not_running": "Not running",
+        "configured": "Configured",
+        "not_configured": "Not configured"
+    },
+    "docs": {
+        "SharedFolder": "The name of Business Cube 2 main shared folder (Default: Bus). Folder has to exist and must be empty.",
+        "ArcprocDB": "The name of Business Cube 2 procedure archive (Default: Arcproc).",
+        "CompanyDB": "The name of Business Cube 2 sample company database (Default: Prova)."
+    },
+    "save": "Save",
+    "cancel": "Cancel",
+    "next": "Next",
+    "prev": "Previous",
+    "of": "of",
+    "rows_per_page": "Rows per page",
+    "search": "Search",
+    "all": "All",
+    "package_required": "Missing packages",
+    "package_required_desc": "To access this page you have to install the required packages listed below",
+    "install_package": "Install package",
+    "change": "Change"
+}

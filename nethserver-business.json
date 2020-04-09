@@ -1,0 +1,23 @@
+{
+    "id": "nethserver-business",
+    "name": "Business Cube 2",
+    "summary": "Nethserver Business",
+    "description": "Business Cube 2 integration for NethServer",
+    "url": "",
+    "homepage": "https://github.com/NethServer/nethserver-business",
+    "provides": ["nethserver-business"],
+    "release": {
+        "version": "_RELEASE_"
+    },
+    "tags": ["business", "nethserver"],
+    "license": "GPL-3.0",
+    "bugs": {
+        "url": "https://github.com/NethServer/dev/issues"
+    },
+    "author": {
+        "name": "Federico Ballarini, Giacomo Sanchietti, Davide Principi",
+        "url": "https://github.com/NethServer/nethserver-business",
+        "email": "fed.ballarini@gmail.com, giacomo.sanchietti@nethesis.it, davide.principi@nethesis.it"
+    },
+    "icon": "logo.png"
+} 

@@ -1,0 +1,10 @@
+#
+# nsapi_nethserver_business
+#
+Cmnd_Alias NSAPI_NETHSERVER_BUSINESS = \
+  /usr/libexec/nethserver/api/nethserver-business/dashboard/read, \
+  /usr/libexec/nethserver/api/nethserver-business/settings/read, \
+  /usr/libexec/nethserver/api/nethserver-business/settings/update, \
+  /usr/libexec/nethserver/api/nethserver-business/settings/validate
+
+Defaults!NSAPI_NETHSERVER_BUSINESS !requiretty

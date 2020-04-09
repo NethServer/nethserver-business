@@ -1,0 +1,57 @@
+#!/usr/bin/perl
+
+#
+# Copyright (C) 2020 Nethesis S.r.l.
+# http://www.nethesis.it - nethserver@nethesis.it
+#
+# This script is part of NethServer.
+#
+# NethServer is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License,
+# or any later version.
+#
+# NethServer is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with NethServer.  If not, see COPYING.
+#
+
+use strict;
+use warnings;
+use esmith::ConfigDB;
+
+require '/usr/libexec/nethserver/api/lib/helper_functions.pl';
+
+my $input = readInput();
+my $cmd = $input->{'action'};
+
+my $ret = {};
+
+if ($cmd eq 'status') {
+  
+  my $out = `systemctl is-active mssql-server`;
+  $ret->{'status'}{'MssqlServer'} = ($? == 0)? 1 : 0;
+  
+  my $db = esmith::ConfigDB->open_ro();
+  
+  my $folder = $db->get_prop('business', 'SharedFolder') || undef;
+  $ret->{'status'}{'SharedFolder'} = (-d "/var/lib/nethserver/ibay/$folder/") && ($folder ne '') ? 1 : 0;
+  
+  my $arcproc = $db->get_prop('business', 'ArcprocDB') || 'Arcproc';
+  $ret->{'status'}{'ArcprocDB'} = (-e "/var/opt/mssql/data/$arcproc.mdf") ? 1 : 0;
+  
+  open (AGGNUMBERFILE, "/var/lib/nethserver/ibay/$folder/Agg/Aggnumber.txt");
+  my $aggnumber = <AGGNUMBERFILE>;
+  close(AGGNUMBERFILE);
+  
+  $ret->{'status'}{'AggNumber'} = $aggnumber || 'N/A';
+  
+} else {
+    error();
+}
+
+print encode_json($ret);

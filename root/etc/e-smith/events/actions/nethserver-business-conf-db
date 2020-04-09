@@ -1,0 +1,51 @@
+#!/bin/bash
+
+#
+# Copyright (C) 2020 Nethesis S.r.l.
+# http://www.nethesis.it - nethserver@nethesis.it
+#
+# This script is part of NethServer.
+#
+# NethServer is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License,
+# or any later version.
+#
+# NethServer is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with NethServer.  If not, see COPYING.
+#
+
+# force default Business Cube databases
+ARCPROCDB="Arcproc"
+COMPANYDB="Prova"
+
+# check if databases already exists
+if [[ -f "/var/opt/mssql/data/${ARCPROCDB}.mdf" ]] || [[ -f "/var/opt/mssql/data/${ARCPROCDB}.mdf" ]]; then
+  echo "Databases already exists"
+  exit 0
+fi
+
+# get mssql password
+PASSWORD=$(cat /var/lib/nethserver/secrets/mssql)
+
+# set permissions on business-defaults folder
+/bin/chown -R mssql:mssql /var/opt/mssql/data/business-defaults
+
+# copy db from temp dir
+/bin/cp -p /var/opt/mssql/data/business-defaults/${ARCPROCDB}.mdf /var/opt/mssql/data/business-defaults/${ARCPROCDB}.ldf /var/opt/mssql/data/
+/bin/cp -p /var/opt/mssql/data/business-defaults/${COMPANYDB}.mdf /var/opt/mssql/data/business-defaults/${COMPANYDB}.ldf /var/opt/mssql/data/
+
+# prepare query
+QUERY="CREATE DATABASE ${ARCPROCDB^^} ON (FILENAME = N'/var/opt/mssql/data/${ARCPROCDB}.mdf'), (FILENAME = N'/var/opt/mssql/data/${ARCPROCDB}.ldf') 
+FOR ATTACH_REBUILD_LOG
+CREATE DATABASE ${COMPANYDB^^} ON (FILENAME = N'/var/opt/mssql/data/${COMPANYDB}.mdf'), (FILENAME = N'/var/opt/mssql/data/${COMPANYDB}.ldf') 
+FOR ATTACH_REBUILD_LOG
+GO"
+
+# execute query
+/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P ${PASSWORD} -Q "${QUERY}"

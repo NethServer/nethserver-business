@@ -1,0 +1,85 @@
+#!/usr/bin/php
+<?php
+  
+/*
+ * Copyright (C) 2020 Nethesis S.r.l.
+ * http://www.nethesis.it - nethserver@nethesis.it
+ *
+ * This script is part of NethServer.
+ *
+ * NethServer is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License,
+ * or any later version.
+ *
+ * NethServer is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with NethServer.  If not, see COPYING.
+*/
+
+require_once("/usr/libexec/nethserver/api/lib/users_functions.php");
+
+
+function validateDB($data) {
+  $v = new LegacyValidator($data['databases']);
+
+  # force default Business Cube databases
+  $arcprocdb = "Arcproc";
+  $companydb = "Prova";
+  
+  if (file_exists("/var/opt/mssql/data/$arcprocdb.mdf")) {
+    $v->addValidationError('ArcprocDB', 'ArcprocDBAlreadyExists', $v->parameters['ArcprocDB']);
+  }
+  
+  if (file_exists("/var/opt/mssql/data/$companydb.mdf")) {
+    $v->addValidationError('CompanyDB', 'CompanyDBAlreadyExists', $v->parameters['CompanyDB']);
+  }
+  
+  if ($v->validate()) {
+    success();
+  } else {
+    error($v);
+  }
+}
+
+function validateFolder($data) {
+    $v = new LegacyValidator($data['folder']);
+
+  $folder = str_replace("."," ",$data['folder']['SharedFolder']);
+  
+  if ((!is_dir("/var/lib/nethserver/ibay/$folder") || !is_empty_dir("/var/lib/nethserver/ibay/$folder")) && $folder) {
+    $v->addValidationError('SharedFolder', 'SharedFolderNotExists', $v->parameters['SharedFolder']);
+  }
+  
+  if ($v->validate()) {
+    success();
+  } else {
+    error($v);
+  }
+}
+
+function is_empty_dir($dirname) {
+  if (!is_dir($dirname)) {
+    return false;
+  }
+  foreach (scandir($dirname) as $file) {
+    if (!in_array($file, array('.','..','.svn','.git'))) {
+      return false;
+    }
+  }
+  return true;
+}
+
+$data = readInput();
+
+if ($data['action'] == 'conf-db') {
+    validateDB($data);
+} else if ($data['action'] == 'conf-folder') {
+    validateFolder($data);
+} else {
+    error();
+}
