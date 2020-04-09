@@ -10,6 +10,7 @@ URL: %{url_prefix}/%{name}
 
 Requires: nethserver-base
 Requires: nethserver-mssql
+Requires: nethserver-samba
 
 BuildRequires: nethserver-devtools
 
