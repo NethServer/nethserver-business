@@ -35,6 +35,7 @@ PASSWORD=$(cat /var/lib/nethserver/secrets/mssql)
 
 # set permissions on business-defaults folder
 /bin/chown -R mssql:mssql /var/opt/mssql/data/business-defaults
+/bin/chmod -R 640 /var/opt/mssql/data/business-defaults
 
 # copy db from temp dir
 /bin/cp -p /var/opt/mssql/data/business-defaults/${ARCPROCDB}.mdf /var/opt/mssql/data/business-defaults/${ARCPROCDB}.ldf /var/opt/mssql/data/
