@@ -162,6 +162,28 @@
             </div>
           </div>
         </form>
+        
+        <h3>{{$t('settings.fix_permissions')}}</h3>
+        <h5>{{$t('settings.fix_setup_permissions')}}.</h5>
+        <form class="form-horizontal" v-on:submit.prevent="fixPermissions()">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="form-group margintop">
+                <label class="col-sm-2 control-label">
+                </label>
+                <div class="col-sm-5">
+                  <button 
+                    class="btn btn-primary margintop" 
+                    type="submit"
+                    :disabled="!configuration.FixPermissions"
+                  >
+                    {{$t('settings.fix_permissions')}}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
       <div v-else-if="configuration.installed && !configuration.isrunning" class="margintop">
         <div class="alert alert-warning">
@@ -207,7 +229,8 @@ export default {
         CompanyDBStatus: false,
         SharedFolder: null,
         ArcprocDB: "Arcproc",
-        CompanyDB: "Prova"
+        CompanyDB: "Prova",
+        FixPermissions: false
       },
       errors: this.initErrors()
     }
@@ -363,6 +386,23 @@ export default {
       var context = this;
       context.configuration.SharedFolder = '';
       context.confSharedFolder();
+    },
+    fixPermissions() {
+      var context = this;
+      nethserver.exec(
+        ["nethserver-business/settings/update"],
+        { action: "fix-perm" },
+        function(success) {
+          nethserver.notifications.success = context.$i18n.t(
+            "settings.fix_permissions_success"
+          );
+        },
+        function(error, data) {
+          nethserver.notifications.success = context.$i18n.t(
+            "settings.fix_permissions_error"
+          );
+        }
+      );
     },
     initErrors() {
       return {

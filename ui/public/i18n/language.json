@@ -12,7 +12,7 @@
         "install_from_software_center": "Install these packages from Software Center and configure them in order to proceed",
         "error_reading_business_configuration": "Error while reading NethServer Business configuration",
         "shared_folder_desc": "This function will connect default Business Cube 2 shared folder. You need to create it from File Server page before proceed",
-        "databases_desc": "This function will import default Business Cube 2 databases",
+        "databases_desc": "This function will import default Business Cube 2 databases. Databases are already on the server, you don't need to uplaoad them, but just import them",
         "shared_folder_name": "Shared folder name",
         "shared_folder": "Shared folder",
         "arcproc_db_name": "Arcproc database name",
@@ -26,7 +26,11 @@
         "shared_folder_not_exists_or_not_empty": "Specified shared folder doesn't exist or is not empty",
         "folder_configuration_ok": "Shared folder successfully connected",
         "folder_configuration_error": "Error while connecting shared folder",
-        "disconnect_share": "Disconnect share"
+        "disconnect_share": "Disconnect share",
+        "fix_permissions": "Fix permissions",
+        "fix_setup_permissions": "This function will fix setup files permissions to execute them properly on clients. Folder Agg/Setup must exists",
+        "fix_permissions_success": "Permissions fixed successfully",
+        "fix_permissions_error": "Error while fixing permissions"
     },
     "about": {
         "title": "About",

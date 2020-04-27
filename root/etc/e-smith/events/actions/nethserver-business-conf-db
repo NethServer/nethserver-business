@@ -50,3 +50,15 @@ GO"
 
 # execute query
 /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P ${PASSWORD} -Q "${QUERY}"
+
+# fix connection string
+HOSTNAME=$(/usr/bin/hostname)
+ADOCONNECT="Server=${HOSTNAME};Database=${COMPANYDB^^};UID=sa;pwd=${PASSWORD};LANGUAGE=us_english;APP=Business"
+AZCONNECT="ODBC;Driver={SQL Server};Server=${HOSTNAME};Database=${COMPANYDB^^};UID=sa;PWD=${PASSWORD};LANGUAGE=us_english;APP=Business;"
+
+QUERY="USE ${ARCPROCDB^^}
+UPDATE AZIENDE SET az_adoconnect = '${ADOCONNECT}', azConnect = '${AZCONNECT}' WHERE AzCodaz = 'PROVA'
+GO"
+
+# execute query
+/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P ${PASSWORD} -Q "${QUERY}"

@@ -54,23 +54,36 @@ if ($input->{'action'} eq 'conf-db') {
     $db->get('business')->merge_props(%props);
     $eventName = "nethserver-business-update";
     
+} elsif ($input->{'action'} eq 'fix-perm') {
+    
+    my $folder = $db->get_prop('business', 'SharedFolder') || undef;
+    my $out = system("/usr/bin/chmod -R 766 /var/lib/nethserver/ibay/$folder/Agg/Setup/");
+    if ($? == 0) {
+      $ret = {'state' => 'success'};
+    } else {
+      $ret = {'state' => 'error'};
+      $exitCode = 1;
+    }
+    
 } else {
     error();
 }
 
 esmith::event::set_json_log(1);
 
-if (esmith::event::event_signal($eventName)) {
-    $ret = {'state' => 'success'};
-} else {
-    $ret = {
-        'type' => 'Error',
-        'message' => 'business.api_update_failed',
-        'attributes' => {
-            'event_name' => $eventName
-        }
-    };
-    $exitCode = 1;
+if ($eventName) {
+  if (esmith::event::event_signal($eventName)) {
+      $ret = {'state' => 'success'};
+  } else {
+      $ret = {
+          'type' => 'Error',
+          'message' => 'business.api_update_failed',
+          'attributes' => {
+              'event_name' => $eventName
+          }
+      };
+      $exitCode = 1;
+  }
 }
 
 print encode_json($ret);
