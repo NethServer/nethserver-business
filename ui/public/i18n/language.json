@@ -9,7 +9,7 @@
         "default_databases_already_configured": "Databases are already configured. You need to delete or rename them, if you want to reconfigure",
         "services_are_not_running": "One or more services are not running",
         "check_services": "Please check mssql and smb services",
-        "install_from_software_center": "Install these packages from Software Center and configure them in order to proceed",
+        "install_from_software_center": "Install these packages from Software Center and configure them in order to proceed. If you've already installed these packages, you need to configure Microsoft SQL Server from its page",
         "error_reading_business_configuration": "Error while reading NethServer Business configuration",
         "shared_folder_desc": "This function will connect default Business Cube 2 shared folder. You need to create it from File Server page before proceed",
         "databases_desc": "This function will import default Business Cube 2 databases. Databases are already on the server, you don't need to uplaoad them, but just import them",
