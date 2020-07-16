@@ -1,6 +1,6 @@
 Summary: NethServer Business
 Name: nethserver-business
-Version: 1.0.0
+Version: 0.0.1
 Release: 1%{?dist}
 License: GPL
 Source0: %{name}-%{version}.tar.gz
