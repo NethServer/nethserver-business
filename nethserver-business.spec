@@ -1,6 +1,6 @@
 Summary: NethServer Business
 Name: nethserver-business
-Version: 0.0.1
+Version: 1.0.0
 Release: 1%{?dist}
 License: GPL
 Source0: %{name}-%{version}.tar.gz
@@ -49,4 +49,5 @@ rm -rf %{buildroot}
 
 
 %changelog
-
+* Thu Jul 16 2020 Federico Ballarini <fed.ballarini@gmail.com> - 1.0.0-1
+- Initial package
