@@ -57,7 +57,7 @@ if ($input->{'action'} eq 'conf-db') {
 } elsif ($input->{'action'} eq 'fix-perm') {
     
     my $folder = $db->get_prop('business', 'SharedFolder') || undef;
-    my $out = system("/usr/bin/chmod -R 766 /var/lib/nethserver/ibay/$folder/Agg/Setup/");
+    my $out = system("/usr/bin/chmod -R 766 /var/lib/nethserver/ibay/$folder/Agg/Setup/ /var/lib/nethserver/ibay/$folder/Agg/Sbc/");
     if ($? == 0) {
       $ret = {'state' => 'success'};
     } else {
