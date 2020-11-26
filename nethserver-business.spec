@@ -1,6 +1,6 @@
 Summary: NethServer Business
 Name: nethserver-business
-Version: 1.0.0
+Version: 1.0.1
 Release: 1%{?dist}
 License: GPL
 Source0: %{name}-%{version}.tar.gz
@@ -49,5 +49,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Thu Nov 26 2020 Federico Ballarini <fed.ballarini@gmail.com> - 1.0.1-1
+- Business Cube: unable to work into Agg/Sbc folder - Bug NethServer/dev#6332
+- Business Cube: improve Cockpit interface - Bug NethServer/dev#6349
+
 * Thu Jul 16 2020 Federico Ballarini <fed.ballarini@gmail.com> - 1.0.0-1
 - Initial package
