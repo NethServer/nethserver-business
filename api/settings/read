@@ -63,7 +63,7 @@ if ($cmd eq 'configuration') {
     $ret->{'configuration'}{'CompanyDB'} = $companydb;
     $ret->{'configuration'}{'CompanyDBStatus'} = (-e "/var/opt/mssql/data/$companydb.mdf") ? JSON::true : JSON::false;
     
-    $ret->{'configuration'}{'FixPermissions'} = (-d "/var/lib/nethserver/ibay/$folder/Agg/Setup/") ? JSON::true : JSON::false;
+    $ret->{'configuration'}{'FixPermissions'} = (-d "/var/lib/nethserver/ibay/$folder/Agg/Setup/") || (-d "/var/lib/nethserver/ibay/$folder/Agg/Sbc/") ? JSON::true : JSON::false;
     
   } else {
     $ret->{'configuration'}{'installed'} = 0;
